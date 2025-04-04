@@ -6,24 +6,6 @@ public class LinkedList {
     private Node tail;
     private int length;
 
-    //   +===================================================+
-    //   |                  WRITE YOUR CODE HERE             |
-    //   | Description:                                      |
-    //   | - Constructor for the LinkedList class.           |
-    //   | - Initializes the linked list with a single node. |
-    //   |                                                   |
-    //   | Parameters:                                       |
-    //   | - value: The integer value of the first node in   |
-    //   |   the newly created linked list.                  |
-    //   |                                                   |
-    //   | Behavior:                                         |
-    //   | - A new Node is created with the given value.     |
-    //   | - This node is set as both the head and tail of   |
-    //   |   the list, indicating it is the only node in the |
-    //   |   list at creation.                               |
-    //   | - The length of the list is initialized to 1.     |
-    //   +===================================================+
-
     public LinkedList(int value){
         Node node = new Node(value);
         this.head = node;
@@ -31,10 +13,9 @@ public class LinkedList {
         this.length = 1;
     }
 
-
     public static class Node {
 
-        int value;
+        public int value;
         Node next;
 
         public Node(int value){
@@ -42,6 +23,134 @@ public class LinkedList {
         }
 
     }
+
+    public void append(int value){
+        Node newNode = new Node(value);
+        if(length == 0){
+            head = newNode;
+            tail = newNode;
+        }else{
+            //This order is important to follow
+            tail.next = newNode; //Receive the next node on this tail
+            tail = newNode; //Set the new tail
+        }
+        length++;
+    }
+
+    public Node removeLast(){
+        if(length == 0) return null;
+
+        Node temp = head;
+        Node pre = head;
+
+        while(temp.next != null){
+            pre = temp; //Pre is always one step behind temp for set the new tail
+            temp = temp.next; //Gets the next value until this value equals null
+        }
+
+        tail = pre; //new tail
+        tail.next = null; //remove the last value
+        length--;
+
+        if(length == 0){
+            head = null;
+            tail = null;
+        }
+        return temp;
+    }
+
+    public void prepend(int value){
+
+        Node newNode = new Node(value);
+
+        if(length == 0){
+            head = newNode;
+            tail = newNode;
+        }else{
+            newNode.next = head;
+            head = newNode;
+        }
+        length++;
+    }
+
+    public Node removeFirst(){
+        if(length == 0) return null;
+        Node temp = head;
+        head = head.next;
+        temp.next = null; //Remove the reference
+        length--;
+        if(length == 0){
+            tail = null;
+        }
+        return temp;
+    }
+
+    public Node get(int index){
+        if(index < 0 || index >= length) return null;
+
+        Node temp = head;
+
+        for(int i = 0; i < index; i++){
+            temp = temp.next;
+        }
+
+        return  temp;
+    }
+
+    public boolean set(int index, int value){
+        Node temp = get(index);
+        if(temp != null){
+            temp.value = value;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean insert(int index, int value){
+        if(index < 0 || index > length) return false;
+
+        if(index == 0) { prepend(value); return true; };
+        if(index == length) { append(value); return true; };
+
+        Node temp = get(index - 1);
+        Node newNode = new Node(value);
+
+        newNode.next = temp.next;
+        temp.next = newNode;
+        length++;
+
+        return true;
+    }
+
+    public Node remove(int index){
+        if(index < 0 || index >= length) return null;
+        if(index == 0 ) return removeFirst();
+        if(index == length -1) return removeLast();
+
+        Node prev = get(index - 1);
+        Node temp = prev.next;
+
+        prev.next = temp.next;
+        temp.next = null;
+        length--;
+        return temp;
+    }
+
+    public void reverse(){
+        Node temp = head;
+        head = tail;
+        tail = temp;
+        Node after = temp.next;
+        Node before = null;
+        for(int i = 0; i < length; i++){
+            after = temp.next;
+            temp.next = before;
+            before = temp;
+            temp = after;
+        }
+
+    }
+
 
     public Node getHead() {
         return head;
