@@ -4,53 +4,22 @@ public class DoublyLinkedList {
 
 
     public static void main(String[] args) {
-        DoublyLinkedList doublyLinkedList = new DoublyLinkedList(10);
+        DoublyLinkedList myDLL1 = new DoublyLinkedList(1);
+        myDLL1.append(2);
+        myDLL1.append(3);
+        myDLL1.append(2);
+        myDLL1.append(1);
 
-        System.out.println("Append \n");
+        System.out.println("myDLL1 isPalindrome:");
+        System.out.println( myDLL1.isPalindrome() );
 
-        doublyLinkedList.append(11);
-        doublyLinkedList.append(123);
-        doublyLinkedList.append(1);
-        doublyLinkedList.append(21);
-        doublyLinkedList.append(100);
-        doublyLinkedList.printList();
+        DoublyLinkedList myDLL2 = new DoublyLinkedList(1);
+        myDLL2.append(2);
+        myDLL2.append(3);
 
-        System.out.println("Prepend \n");
+        System.out.println("\nmyDLL2 isPalindrome:");
+        System.out.println( myDLL2.isPalindrome() );
 
-        doublyLinkedList.prepend(12);
-        doublyLinkedList.printList();
-
-        System.out.println("Remove last \n");
-
-        System.out.println("Node removed: " + doublyLinkedList.removeLast().value);
-
-        doublyLinkedList.printList();
-
-        System.out.println("Remove First \n");
-
-        System.out.println("Node removed: " + doublyLinkedList.removeFirst().value);
-
-        doublyLinkedList.printList();
-
-        System.out.println("Get \n");
-
-        System.out.println(doublyLinkedList.get(2).value);
-        System.out.println(doublyLinkedList.get(doublyLinkedList.lenght - 2).value);
-
-        System.out.println("Set \n");
-
-        doublyLinkedList.set(0, 101);
-        doublyLinkedList.printList();
-
-        System.out.println("Insert \n");
-
-        doublyLinkedList.insert(1, 102);
-        doublyLinkedList.printList();
-
-        System.out.println("Remove \n");
-
-        doublyLinkedList.remove(1);
-        doublyLinkedList.printList();
     }
 
     Node head;
@@ -226,4 +195,28 @@ public class DoublyLinkedList {
     public void getLenght(){
         System.out.println("Length: " + lenght);
     }
+
+    public boolean isPalindrome(){
+
+        if(lenght == 1){
+            return  true;
+        }
+
+        Node n1 = head;
+        Node n2 = tail;
+
+        for(int i = 0; i < lenght / 2;i++){
+
+            n2 = n2.prev;
+            n1 = n1.next;
+
+            if(n2.value != n1.value){
+                return false;
+            }
+
+        }
+
+        return true;
+    }
+
 }
