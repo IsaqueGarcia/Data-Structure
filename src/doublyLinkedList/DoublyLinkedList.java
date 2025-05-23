@@ -7,18 +7,13 @@ public class DoublyLinkedList {
         DoublyLinkedList myDLL1 = new DoublyLinkedList(1);
         myDLL1.append(2);
         myDLL1.append(3);
-        myDLL1.append(2);
-        myDLL1.append(1);
+        myDLL1.append(4);
+        myDLL1.append(5);
 
-        System.out.println("myDLL1 isPalindrome:");
-        System.out.println( myDLL1.isPalindrome() );
-
-        DoublyLinkedList myDLL2 = new DoublyLinkedList(1);
-        myDLL2.append(2);
-        myDLL2.append(3);
-
-        System.out.println("\nmyDLL2 isPalindrome:");
-        System.out.println( myDLL2.isPalindrome() );
+        myDLL1.printList();
+        myDLL1.reverse();
+        System.out.println("==============");
+        myDLL1.printList();
 
     }
 
@@ -217,6 +212,31 @@ public class DoublyLinkedList {
         }
 
         return true;
+    }
+
+    public void reverse(){
+        //Revert the nodes of the list
+        //Validate one node and null nodes
+        //1 2 3 4 5 -> 5 4 3 2 1
+
+        if(head == null) return;
+        if(lenght == 1) return;
+
+        Node current = head;
+        Node temporary = null;
+
+        while(current != null){
+            temporary = current.prev; //null
+            current.prev = current.next; //2
+            current.next = temporary; //null
+            current = current.prev;
+
+        }
+
+        temporary = head;
+        head = tail;
+        tail = temporary;
+
     }
 
 }
