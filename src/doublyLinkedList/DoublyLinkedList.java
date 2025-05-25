@@ -4,14 +4,15 @@ public class DoublyLinkedList {
 
 
     public static void main(String[] args) {
-        DoublyLinkedList myDLL1 = new DoublyLinkedList(1);
-        myDLL1.append(2);
-        myDLL1.append(3);
-        myDLL1.append(4);
+        DoublyLinkedList myDLL1 = new DoublyLinkedList(3);
+        myDLL1.append(8);
         myDLL1.append(5);
+        myDLL1.append(10);
+        myDLL1.append(2);
+        myDLL1.append(1);
 
         myDLL1.printList();
-        myDLL1.reverse();
+        myDLL1.partitionList(5);
         System.out.println("==============");
         myDLL1.printList();
 
@@ -237,6 +238,143 @@ public class DoublyLinkedList {
         head = tail;
         tail = temporary;
 
+    }
+
+    public void partitionList(int x) {
+        //   +===================================================+
+        //   |               WRITE YOUR CODE HERE                |
+        //   | Description:                                      |
+        //   | - Partitions a doubly linked list around a value  |
+        //   |   `x`.                                            |
+        //   | - Nodes with values less than `x` come before     |
+        //   |   nodes with values greater than or equal to `x`. |
+        //   |                                                   |
+        //   | Behavior:                                         |
+        //   | - Uses two dummy nodes to build two sublists:     |
+        //   |   one for < x, one for >= x.                      |
+        //   | - Traverses the list, linking nodes to the        |
+        //   |   appropriate sublist and updating prev pointers. |
+        //   | - Joins the two sublists together.                |
+        //   | - Updates the head and resets head.prev to null.  |
+        //   +===================================================+
+        if(head == null) return;
+
+        Node dummy1 = new Node(0);
+        Node dummy2 = new Node(0);
+        Node less = dummy1;
+        Node more = dummy2;
+        Node current = head;
+
+        while(current != null){
+
+            if(current.value >= x){
+
+                more.next = current;
+                current.prev = more;
+                more = current;
+
+            }else{
+
+                less.next = current;
+                current.prev = less;
+                less = current;
+
+            }
+
+            current = current.next;
+        }
+
+        more.next = null;
+        less.next = dummy2.next;
+
+        if(dummy2.next != null){
+            dummy2.next.prev = less;
+        }
+
+        head = dummy1.next;
+
+        if(head != null){
+            head.prev = null;
+        }
+    }
+
+    public void reverseBetween(int startIndex, int endIndex) {
+        //   +===================================================+
+        //   |               WRITE YOUR CODE HERE                |
+        //   | Description:                                      |
+        //   | - Reverses a portion of a doubly linked list      |
+        //   |   between two indices (inclusive range).          |
+        //   | - Only nodes between startIndex and endIndex are  |
+        //   |   reversed in place.                              |
+        //   |                                                   |
+        //   | Behavior:                                         |
+        //   | - A dummy node simplifies handling edge cases.    |
+        //   | - `prev` is positioned just before the reversal.  |
+        //   | - Nodes are relocated one at a time to reverse    |
+        //   |   their order within the specified segment.       |
+        //   | - All `next` and `prev` pointers are correctly    |
+        //   |   updated to maintain list integrity.             |
+        //   | - The head pointer is reset at the end.           |
+        //   +===================================================+
+
+        if(head == null) return;
+
+        Node dummy1 = new Node(0); //For keep the reference of the first pointer
+        dummy1.next = head;
+        Node current = head;
+        Node prev = null;
+
+        for(int i = 0; i < startIndex; i++){
+            current = current.next;
+        }
+
+        prev = current;
+
+        for(int i = startIndex; i < endIndex; i++){
+            Node moveTo = current.next;
+
+            current.next = prev;
+            current = moveTo;
+            current.next.prev = moveTo;
+
+            current = current.next;
+            prev = prev.next;
+        }
+
+        head = dummy1.next;
+
+//        if(head == null) return;
+//        if(startIndex == endIndex) return;
+//
+//        Node dummy1 = new Node(0); //For keep the reference of the first pointer
+//        dummy1.next = head;
+//        head.prev = dummy1;
+//        Node prev = dummy1;
+//
+//        for(int i = 0; i < startIndex ; i++){
+//            prev = prev.next;
+//        }
+//
+//        Node current = prev.next;
+//
+//        for(int i = startIndex; i < endIndex; i++){
+//            Node moveTo = current.next;
+//
+//            current.next = moveTo.next;
+//
+//            if(moveTo.next != null){
+//                moveTo.next.prev = current;
+//            }
+//
+//            moveTo.next = prev.next;
+//            prev.next.prev = moveTo;
+//
+//            prev.next = moveTo;
+//            moveTo.prev = prev;
+//        }
+//
+//        head = dummy1.next;
+//        head.prev = null;
     }
 
 }
