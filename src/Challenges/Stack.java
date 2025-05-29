@@ -1,3 +1,5 @@
+package Challenges;
+
 import java.util.ArrayList;
 
 public class Stack<T> {
@@ -22,10 +24,10 @@ public class Stack<T> {
        return myStack.isEmpty();
    }
 
-//    public static void sortStack(Stack<Integer> stack){
+//    public static void sortStack(Challenges.Stack<Integer> stack){
 //        //2 - 4 - 1 - 3
 //
-//        Stack<Integer> sortingStack = new Stack<>();
+//        Challenges.Stack<Integer> sortingStack = new Challenges.Stack<>();
 //
 //        while (!stack.isEmpty()){
 //            Integer temp = stack.pop(); // get the last element

@@ -1,3 +1,5 @@
+package Challenges;
+
 import java.util.Stack;
 
 public class MyQueue {
