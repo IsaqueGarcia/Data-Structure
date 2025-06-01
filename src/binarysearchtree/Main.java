@@ -15,6 +15,8 @@ public class Main {
 
         System.out.println("value = " + bst.root.left.right.value);
 
+        System.out.println(bst.contains(21));
+        System.out.println(bst.contains(17));
 
 
     }
