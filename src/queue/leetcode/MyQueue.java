@@ -1,4 +1,4 @@
-package Challenges;
+package queue.leetcode;
 
 import java.util.Stack;
 

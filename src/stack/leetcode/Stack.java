@@ -1,4 +1,4 @@
-package Challenges;
+package stack.leetcode;
 
 import java.util.ArrayList;
 
@@ -24,10 +24,10 @@ public class Stack<T> {
        return myStack.isEmpty();
    }
 
-//    public static void sortStack(Challenges.Stack<Integer> stack){
+//    public static void sortStack(stack.leetcode.Stack<Integer> stack){
 //        //2 - 4 - 1 - 3
 //
-//        Challenges.Stack<Integer> sortingStack = new Challenges.Stack<>();
+//        stack.leetcode.Stack<Integer> sortingStack = new stack.leetcode.Stack<>();
 //
 //        while (!stack.isEmpty()){
 //            Integer temp = stack.pop(); // get the last element
